@@ -12,6 +12,5 @@ func Setup(r *gin.Engine) {
 	v1 := r.Group("/api/v1")
 	{
 		v1.GET("/health", handlers.HealthCheck)
-		v1.GET("/artists", handlers.GetArtists)
 	}
 }
