@@ -1,13 +1,19 @@
 package handlers
 
 import (
+	"net/http"
+
 	"github.com/evamdf/api-project/database"
 	"github.com/evamdf/api-project/models"
 	"github.com/gin-gonic/gin"
 )
 
 func GetPlaylists(c *gin.Context) {
-	// initialize slice so JSON marshals to [] (empty array) instead of null
 	var playlists []models.Playlist = []models.Playlist{}
-	database.DB.Find(&playlists)
+	result := database.DB.Find(&playlists)
+	if result.Error != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch playlists"})
+		return
+	}
+	c.JSON(http.StatusOK, playlists)
 }

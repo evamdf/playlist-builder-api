@@ -6,3 +6,8 @@ type Response struct {
 	Data    interface{} `json:"data,omitempty"`
 	Error   string      `json:"error,omitempty"`
 }
+
+type PlaylistTracksResponse struct {
+	Name   string   `json:"name"`
+	Tracks []string `json:"tracks"`
+}

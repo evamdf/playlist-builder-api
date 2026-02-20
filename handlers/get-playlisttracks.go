@@ -11,42 +11,38 @@ import (
 	"gorm.io/gorm"
 )
 
-// GetPlaylistTracks returns all tracks belonging to the playlist specified by
-// the :id URL parameter. Response uses models.Response for a consistent API.
 func GetPlaylistTracks(c *gin.Context) {
-	// Parse and validate id from url
-	idParam := c.Param("id")
-	playlistID, err := strconv.Atoi(idParam)
+	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
-		c.JSON(http.StatusBadRequest, models.Response{Success: false, Error: "invalid playlist id"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid playlist id"})
 		return
 	}
 
-	// Ensure playlist exists
 	var playlist models.Playlist
-	if err := database.DB.First(&playlist, "PlaylistId = ?", playlistID).Error; err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			c.JSON(http.StatusNotFound, models.Response{Success: false, Error: "playlist not found"})
-			return
+	result := database.DB.First(&playlist, id)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			c.JSON(http.StatusNotFound, gin.H{"error": "playlist not found"})
+		} else {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
 		}
-		c.JSON(http.StatusInternalServerError, models.Response{Success: false, Error: "failed to fetch playlist"})
 		return
 	}
 
-	// Query playlist tracks
-	var tracks []models.PlaylistTrack
-	if err := database.DB.Where("PlaylistId = ?", playlistID).Find(&tracks).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, models.Response{Success: false, Error: "failed to fetch playlist tracks"})
-		return
+	var tracks []models.Track
+	database.DB.Table("\"Track\"").
+		Joins("JOIN \"PlaylistTrack\" ON \"PlaylistTrack\".\"TrackId\" = \"Track\".\"TrackId\"").
+		Where("\"PlaylistTrack\".\"PlaylistId\" = ?", id).
+		Find(&tracks)
+
+	playlist.Tracks = tracks
+
+	response := models.PlaylistTracksResponse{
+		Name: playlist.Name,
+	}
+	for _, track := range playlist.Tracks {
+		response.Tracks = append(response.Tracks, track.Name, track.Composer)
 	}
 
-	// Return wrapped response
-	payload := map[string]interface{}{
-		"playlist_id":   playlist.PlaylistId,
-		"playlist_name": playlist.Name,
-		"track_count":   len(tracks),
-		"tracks":        tracks,
-	}
-
-	c.JSON(http.StatusOK, models.Response{Success: true, Data: payload})
+	c.JSON(http.StatusOK, response)
 }
