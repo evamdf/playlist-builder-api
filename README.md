@@ -14,3 +14,9 @@ curl http://localhost:8080/api/v1/playlists/3 # To get all the names and compose
 ```
 
 Uses one of the sample neon postgres databases (chinook)
+
+#### TO DO
+- Make output of playlist retriever readable
+- Ability to add/remove songs from a playlist
+- GET for all the other info
+- ...
