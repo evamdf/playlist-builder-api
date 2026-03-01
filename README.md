@@ -2,6 +2,17 @@ This project is a work in progress and currently incomplete :)
 
 #### Running
 
+Create `.env` file with variables:
+
+```
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=password
+DB_NAME=api-project
+DB_SSLMODE=disable
+```
+
 ```bash
 go run main.go
 ```

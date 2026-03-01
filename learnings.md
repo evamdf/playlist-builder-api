@@ -51,3 +51,15 @@ docker compose logs postgres
 ```
 
 
+To start existing container:
+
+```bash
+docker ps -a # To see all containers
+
+docker start api-project-postgres
+
+# Verify it worked
+docker exec -it api-project-postgres psql -U postgres -d api-project
+```
+
+
