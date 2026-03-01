@@ -18,5 +18,5 @@ Uses one of the sample neon postgres databases (chinook)
 #### TO DO
 - Make output of playlist retriever readable
 - Ability to add/remove songs from a playlist
-- GET for all the other info
+- GET for all the other info - eg see details about a song in a playlist
 - ...
