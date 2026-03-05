@@ -12,10 +12,15 @@ func Setup(r *gin.Engine) {
 	v1 := r.Group("/api/v1")
 	{
 		v1.GET("/health", handlers.HealthCheck)
+
 		v1.GET("/artists", handlers.GetArtists)
+		v1.GET("/artists/:id", handlers.GetArtistByID)
+		v1.GET("/artists/:id/albums", handlers.GetAlbumByArtistID)
+
 		v1.GET("/playlists", handlers.GetPlaylists)
 		v1.GET("/playlists/:id", handlers.GetPlaylistTracks)
+
 		v1.GET("/albums", handlers.GetAlbums)
-		v1.GET("/albums/artist/:id", handlers.GetAlbumByArtistID)
+
 	}
 }
