@@ -15,6 +15,7 @@ func Setup(r *gin.Engine) {
 		v1.GET("/artists", handlers.GetArtists)
 		v1.GET("/playlists", handlers.GetPlaylists)
 		v1.GET("/playlists/:id", handlers.GetPlaylistTracks)
-
+		v1.GET("/albums", handlers.GetAlbums)
+		v1.GET("/albums/artist/:id", handlers.GetAlbumByArtistID)
 	}
 }
