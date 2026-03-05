@@ -1,15 +1,13 @@
 
-### Dependencies for go + postgres + GORM
+# Dependencies for go + postgres + GORM
+
 ```bash
 go get gorm.io/gorm
 go get gorm.io/driver/postgres
 go get github.com/joho/godotenv
 ```
 
-`godotenv` lets you store database credentials in a `.env` file instead of hardcoding 
-
-
-
+`godotenv` lets you store database credentials in a `.env` file instead of hardcoding
 
 To get the DB working I did:
 
@@ -28,11 +26,10 @@ docker exec -i api-project-postgres psql -U postgres -d api-project < chinook.sq
 # verify it worked
 docker exec -it api-project-postgres psql -U postgres -d api-project
 \dt
-
 ```
 
+## Useful docker commands
 
-#### Useful docker commands
 ```bash
 # Start Postgres
 docker compose up -d
@@ -50,7 +47,6 @@ docker compose down -v
 docker compose logs postgres
 ```
 
-
 To start existing container:
 
 ```bash
@@ -61,5 +57,3 @@ docker start api-project-postgres
 # Verify it worked
 docker exec -it api-project-postgres psql -U postgres -d api-project
 ```
-
-
