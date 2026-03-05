@@ -21,9 +21,16 @@ go run main.go
 
 ```bash
 curl http://localhost:8080/api/v1/health
-curl http://localhost:8080/api/v1/artists # to get all artists
-curl http://localhost:8080/api/v1/playlists # To get the names and ids of all playlists
-curl http://localhost:8080/api/v1/playlists/3 # To get all the names and composers of the tracks in playlist ID 3 (or any ID value)
+
+curl http://localhost:8080/api/v1/artists # Get all artists
+curl http://localhost:8080/api/v1/artists/12 # Get specific artist
+curl http://localhost:8080/api/v1/artists/:id/albums # Get albums by specific artist
+
+curl http://localhost:8080/api/v1/playlists # Get the names and ids of all playlists
+curl http://localhost:8080/api/v1/playlists/3 # Get all the names and composers of the tracks in playlist ID 3 (or any ID value)
+
+curl http://localhost:8080/api/v1/albums # Get all albums 
+
 ```
 
 Uses one of the sample neon postgres databases (chinook)

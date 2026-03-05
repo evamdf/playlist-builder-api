@@ -11,10 +11,14 @@ import (
 	"gorm.io/gorm"
 )
 
+// Handler function to get all the names and composers of the tracks in a playlist by playlist ID (/api/v1/playlists/:id)
 func GetPlaylistTracks(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid playlist id"})
+		c.JSON(http.StatusBadRequest, models.Response{
+			Success: false,
+			Error:   "invalid playlist id",
+		})
 		return
 	}
 
