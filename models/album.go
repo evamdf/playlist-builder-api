@@ -9,3 +9,18 @@ type Album struct {
 func (Album) TableName() string {
 	return "Album"
 }
+
+func ToAlbumResponse(a Album) AlbumResponse {
+	return AlbumResponse{
+		AlbumId: a.AlbumId,
+		Title:   a.Title,
+	}
+}
+
+func ToAlbumsResponse(albums []Album) []AlbumResponse {
+	var albumResponses []AlbumResponse
+	for _, album := range albums {
+		albumResponses = append(albumResponses, ToAlbumResponse(album))
+	}
+	return albumResponses
+}

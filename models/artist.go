@@ -8,3 +8,18 @@ type Artist struct {
 func (Artist) TableName() string {
 	return "Artist"
 }
+
+func ToArtistResponse(a Artist) ArtistResponse {
+	return ArtistResponse{
+		ArtistId: a.ArtistId,
+		Name:     a.Name,
+	}
+}
+
+func ToArtistsResponse(artists []Artist) []ArtistResponse {
+	var artistResponses []ArtistResponse
+	for _, artist := range artists {
+		artistResponses = append(artistResponses, ToArtistResponse(artist))
+	}
+	return artistResponses
+}

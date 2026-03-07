@@ -15,3 +15,33 @@ type Track struct {
 func (Track) TableName() string {
 	return "Track"
 }
+
+func ToFullTrackResponse(t Track) FullTrackResponse {
+	return FullTrackResponse{
+		TrackId:      t.TrackId,
+		Name:         t.Name,
+		AlbumId:      t.AlbumId,
+		MediaTypeId:  t.MediaTypeId,
+		GenreId:      t.GenreId,
+		Composer:     t.Composer,
+		Milliseconds: t.Milliseconds,
+		Bytes:        t.Bytes,
+		UnitPrice:    t.UnitPrice,
+	}
+}
+
+func ToTrackResponse(t Track) TrackResponse {
+	return TrackResponse{
+		TrackId:  t.TrackId,
+		Name:     t.Name,
+		Composer: t.Composer,
+	}
+}
+
+func ToTracksResponse(tracks []Track) []TrackResponse {
+	var trackResponses []TrackResponse
+	for _, track := range tracks {
+		trackResponses = append(trackResponses, ToTrackResponse(track))
+	}
+	return trackResponses
+}

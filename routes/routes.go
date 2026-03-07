@@ -17,10 +17,14 @@ func Setup(r *gin.Engine) {
 		v1.GET("/artists/:id", handlers.GetArtistByID)
 		v1.GET("/artists/:id/albums", handlers.GetAlbumByArtistID)
 
+		v1.GET("/tracks/:id", handlers.GetFullTrackByID)
+
 		v1.GET("/playlists", handlers.GetPlaylists)
-		v1.GET("/playlists/:id", handlers.GetPlaylistTracks)
+		v1.GET("/playlists/:id", handlers.GetPlaylistByID)
+		v1.GET("/playlists/:id/tracks", handlers.GetPlaylistTracks)
 
 		v1.GET("/albums", handlers.GetAlbums)
+		v1.GET("/albums/:id", handlers.GetAlbumByID)
 
 	}
 }
