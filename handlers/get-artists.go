@@ -15,7 +15,7 @@ func GetArtists(c *gin.Context) {
 	database.DB.Find(&artists)
 	c.JSON(http.StatusOK, models.Response{
 		Success: true,
-		Data:    artists,
+		Data:    models.ToArtistsResponse(artists),
 	})
 }
 
@@ -49,6 +49,6 @@ func GetArtistByID(c *gin.Context) {
 
 	c.JSON(http.StatusOK, models.Response{
 		Success: true,
-		Data:    artist,
+		Data:    models.ToArtistResponse(*artist),
 	})
 }

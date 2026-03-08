@@ -16,7 +16,7 @@ func GetAlbums(c *gin.Context) {
 	database.DB.Find(&albums)
 	c.JSON(http.StatusOK, models.Response{
 		Success: true,
-		Data:    albums,
+		Data:    models.ToAlbumsResponse(albums),
 	})
 }
 
@@ -62,7 +62,41 @@ func GetAlbumByArtistID(c *gin.Context) {
 
 	c.JSON(http.StatusOK, models.Response{
 		Success: true,
-		Data:    albums,
+		Data:    models.ToAlbumsResponse(albums),
+	})
+}
+
+// unexported little helper function to get an album by ID
+func getAlbumByID(id int) (*models.Album, error) {
+	var album models.Album
+	result := database.DB.First(&album, id)
+	return &album, result.Error
+}
+
+// Handler function to get an album by ID (/api/v1/albums/12)
+func GetAlbumByID(c *gin.Context) {
+	// Parse the album ID from the URL parameter
+	album_id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, models.Response{
+			Success: false,
+			Error:   "invalid album ID",
+		})
+		return
+	}
+
+	album, err := getAlbumByID(album_id)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, models.Response{
+			Success: false,
+			Error:   "invalid album ID",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, models.Response{
+		Success: true,
+		Data:    models.ToAlbumResponse(*album),
 	})
 
 }
