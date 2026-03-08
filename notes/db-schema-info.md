@@ -4,7 +4,7 @@
 ## Tables
 
   table_name   |    column_name    |          data_type
----------------+-------------------+-----------------------------
+---------------|-------------------| -----------------------------
  Album         | AlbumId           | integer
  Album         | Title             | character varying
  Album         | ArtistId          | integer
@@ -73,7 +73,7 @@
 ## Primary Keys
 
   table_name   |  column_name  
----------------+---------------
+---------------|---------------
  Album         | AlbumId
  Artist        | ArtistId
  Customer      | CustomerId
@@ -90,7 +90,7 @@
 ## Foreign Keys
 
   table_name   | column_name  | foreign_table | foreign_column
----------------+--------------+---------------+----------------
+---------------|--------------|---------------|----------------
  Album         | ArtistId     | Artist        | ArtistId
  Customer      | SupportRepId | Employee      | EmployeeId
  Employee      | ReportsTo    | Employee      | EmployeeId
