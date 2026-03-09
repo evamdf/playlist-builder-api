@@ -35,7 +35,7 @@ curl http://localhost:8080/api/v1/playlists/3 | jq # Get all the names and compo
 curl http://localhost:8080/api/v1/playlists/3/tracks | jq
 
 curl http://localhost:8080/api/v1/albums | jq # Get all albums 
-curl http://localhost:8080/api/v1/albums/9 | jq
+curl http://localhost:8080/api/v1/albums/9 | jq # Get a specific album
 ```
 
 Uses one of the sample neon postgres databases (chinook)
@@ -50,38 +50,35 @@ Uses one of the sample neon postgres databases (chinook)
 To do
 
 Models for:
-[x] album
-    [x] singular response function
-    [x] plural response function
-[x] artist
-    [x] singular response function
-    [x] plural response function
-[x] playlist
-    [x] singular response function
-    [x] plural response function
-[x] track
-    [x] detailed singular response function
-    [x] singular response func
-    [x] plural response function
+- [x] album
+    - [x] singular response function
+    - [x] plural response function
+- [x] artist
+    - [x] singular response function
+    - [x] plural response function
+- [x] playlist
+    - [x] singular response function
+    - [x] plural response function
+- [x] track
+    - [x] detailed singular response function
+    - [x] singular response func
+    - [x] plural response function
 
 Standard Response types for:
-[x] album
-[x] artist
-[x] playlist
-[x] track simple and full
+- [x] album
+- [x] artist
+- [x] playlist
+- [x] track simple and full
 
 handlers:
-[x] all albums
-[x] album by id
-[x] all albums by an artist id
-
-[x] all artists
-[x] artist by id
-
-[x] all playlists
-[x] playlist by id
-
-[x] track by id
-[ ] tracks in an album
-[x] tracks in a playlist
-[ ] tracks by an artist
+- [x] all albums
+- [x] album by id
+- [x] all albums by an artist id
+- [x] all artists
+- [x] artist by id
+- [x] all playlists
+- [x] playlist by id
+- [x] track by id
+- [ ] tracks in an album
+- [x] tracks in a playlist
+- [ ] tracks by an artist
